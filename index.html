@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kivu Bites · Lake-side grill in Goma (website template)</title>
+<meta name="description" content="Restaurant website template: menu with photos, cart and ordering on WhatsApp, opening hours with live open/closed status, bilingual EN/FR. Demo by Patrick Safari.">
+<meta name="theme-color" content="#123a4a">
+<meta property="og:title" content="Kivu Bites — restaurant website template with WhatsApp ordering">
+<meta property="og:description" content="Menu, cart and WhatsApp ordering for restaurants. A demo template by Patrick Safari.">
+<meta property="og:image" content="img/hero.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23123a4a'/%3E%3Cpath d='M12 34c8-10 22-12 34-4l6-6v20l-6-6c-12 8-26 6-34-4z' fill='%23f0b44c'/%3E%3Ccircle cx='22' cy='32' r='2.5' fill='%23123a4a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Kivu Bites (demo template)","servesCuisine":["Congolese","Grill","Fish"],"priceRange":"$$","address":{"@type":"PostalAddress","addressLocality":"Goma","addressRegion":"North Kivu","addressCountry":"CD"},"openingHours":["Mo-Th 11:00-22:00","Fr-Sa 11:00-23:30","Su 12:00-21:00"],"acceptsReservations":"True"}
+</script>
+<style>
+:root{
+  --cream:#fbf6ee; --paper:#fffdf9; --ink:#1d2326; --muted:#6b6560; --line:#eadfce;
+  --lake:#123a4a; --lake-2:#1d5468; --chili:#d2462f; --gold:#f0b44c; --leaf:#2f7d4f;
+  --r:18px; --shadow:0 18px 40px -26px rgba(29,35,38,.55);
+  --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1160px,100% - 36px);margin-inline:auto}
+.demo{background:var(--ink);color:#f3ece2;font-size:.82rem;text-align:center;padding:7px 12px}
+.demo a{color:var(--gold);font-weight:700}
+/* Nav */
+.nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--cream) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:800;font-size:1.35rem;text-decoration:none;color:var(--lake);white-space:nowrap}
+.logo svg{width:34px;height:34px}
+.links{display:flex;gap:4px;list-style:none;margin-left:12px}
+.links a{text-decoration:none;font-weight:500;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.links a:hover{color:var(--ink);background:var(--line)}
+.sp{flex:1}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper)}
+.seg button{border:0;background:none;padding:6px 10px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--lake);color:#fff}
+.cartbtn{position:relative;display:flex;align-items:center;gap:8px;border:0;background:var(--chili);color:#fff;font-weight:700;padding:10px 16px;border-radius:999px;cursor:pointer;box-shadow:0 10px 24px -12px var(--chili)}
+.cartbtn b{background:#fff;color:var(--chili);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:.78rem;padding:0 6px}
+/* Hero */
+.hero{position:relative;min-height:min(88vh,760px);display:grid;align-items:end;color:#fff;isolation:isolate;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.03)}
+.hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,58,74,.05) 25%,rgba(12,30,38,.82) 100%),linear-gradient(90deg,rgba(12,30,38,.55),transparent 60%)}
+.hero .wrap{padding:0 0 64px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:500}
+.dot{width:9px;height:9px;border-radius:50%;background:#9ca3af}
+.dot.open{background:#4ade80;box-shadow:0 0 0 4px rgba(74,222,128,.25)}
+.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,6.5vw,5.2rem);line-height:1.02;letter-spacing:-.02em;margin:16px 0 14px;max-width:13ch}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{max-width:36rem;font-size:1.1rem;opacity:.92}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.gold{background:var(--gold);color:var(--ink)}
+.btn.glass{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(8px)}
+.btn.wa{background:#25d366;color:#05361a}
+.btn.dark{background:var(--lake);color:#fff}
+.facts{display:flex;flex-wrap:wrap;gap:26px;margin-top:30px;font-size:.92rem;opacity:.95}
+.facts b{display:block;font-family:var(--serif);font-size:1.35rem}
+/* Sections */
+section.block{padding:96px 0}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--chili)}
+h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.08;letter-spacing:-.015em;color:var(--lake);margin:8px 0 12px}
+.lead{color:var(--muted);max-width:40rem;font-size:1.05rem}
+/* Menu */
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 22px}
+.cats button{border:1px solid var(--line);background:var(--paper);padding:8px 16px;border-radius:999px;font-weight:600;cursor:pointer;color:var(--muted)}
+.cats button[aria-pressed="true"]{background:var(--lake);border-color:var(--lake);color:#fff}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.dish{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .2s}
+.dish:hover{transform:translateY(-4px)}
+.dish .ph{aspect-ratio:4/3;overflow:hidden;background:var(--line)}
+.dish .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dish:hover .ph img{transform:scale(1.06)}
+.dish .bd{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.dish h3{font-family:var(--serif);font-size:1.25rem;color:var(--ink);display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.price{font-family:var(--sans);font-weight:700;color:var(--chili);white-space:nowrap;font-size:1.05rem}
+.price small{display:block;color:var(--muted);font-weight:500;font-size:.72rem;text-align:right}
+.dish p{color:var(--muted);font-size:.93rem;margin:6px 0 14px;flex:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:999px;background:#f6ead6;color:#8a5a12}
+.tag.hot{background:#fbe1dc;color:var(--chili)} .tag.veg{background:#e1f1e6;color:var(--leaf)}
+.add{border:0;background:var(--lake);color:#fff;border-radius:12px;padding:10px;font-weight:700;cursor:pointer}
+.add:hover{background:var(--lake-2)}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:4px 34px;margin-top:22px}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--line)}
+.row b{font-weight:700}
+.row span{color:var(--muted);font-size:.88rem;display:block}
+.row .add{padding:6px 12px;border-radius:999px;font-size:.85rem}
+/* About strip */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.story .imgs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.story .imgs img{border-radius:var(--r);aspect-ratio:1;object-fit:cover;box-shadow:var(--shadow)}
+.story .imgs img:nth-child(2){margin-top:40px}
+.points{list-style:none;display:grid;gap:12px;margin-top:20px}
+.points li{display:flex;gap:12px;align-items:flex-start}
+.points i{font-style:normal;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);flex-shrink:0}
+/* Visit */
+.visit{background:var(--lake);color:#eaf2f4}
+.visit h2{color:#fff}
+.visit .lead{color:#b9cfd6}
+.vgrid{display:grid;grid-template-columns:1fr 1.2fr;gap:30px;margin-top:30px}
+.hours{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:20px}
+.hours table{width:100%;border-collapse:collapse}
+.hours td{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.hours td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.hours tr.today td{color:var(--gold);font-weight:700}
+.status{display:inline-flex;align-items:center;gap:8px;font-weight:700;margin-bottom:12px}
+.map{border-radius:var(--r);overflow:hidden;min-height:320px;border:1px solid rgba(255,255,255,.12)}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;filter:saturate(.9)}
+.contact{display:grid;gap:10px;margin-top:16px}
+.contact a{text-decoration:none;display:flex;gap:10px;align-items:center}
+footer{background:#0c2731;color:#9fb6bd;padding:28px 0;font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer a{color:#fff}
+/* Cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(12,20,24,.5);opacity:0;pointer-events:none;transition:.25s;z-index:60}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--paper);z-index:61;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dh h3{font-family:var(--serif);font-size:1.4rem;color:var(--lake)}
+.x{border:0;background:none;font-size:1.6rem;cursor:pointer;color:var(--muted);line-height:1}
+.db{flex:1;overflow:auto;padding:14px 20px;display:grid;gap:14px;align-content:start}
+.ci{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center}
+.ci img,.ci .noimg{width:52px;height:52px;border-radius:12px;object-fit:cover;background:var(--line);display:grid;place-items:center;font-size:1.4rem}
+.ci small{color:var(--muted)}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+.qty button{border:0;background:none;width:30px;height:30px;cursor:pointer;font-weight:800}
+.qty span{min-width:18px;text-align:center}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mode button{border:1px solid var(--line);background:var(--cream);border-radius:12px;padding:10px;font-weight:700;cursor:pointer}
+.mode button[aria-pressed="true"]{border-color:var(--lake);background:#e4eef1;color:var(--lake)}
+.fld{display:grid;gap:5px;font-size:.85rem;font-weight:600;color:var(--muted)}
+.fld input,.fld select,.fld textarea{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--cream);color:var(--ink);font-weight:400}
+.df{border-top:1px solid var(--line);padding:16px 20px;display:grid;gap:10px}
+.tot{display:flex;justify-content:space-between;font-weight:700}
+.tot.big{font-size:1.2rem}
+.muted{color:var(--muted);font-size:.85rem}
+.empty{text-align:center;color:var(--muted);padding:30px 0}
+.preview{white-space:pre-wrap;background:#e7f7ec;border:1px solid #bfe6cb;border-radius:12px;padding:12px;font-size:.88rem;font-family:ui-monospace,Menlo,Consolas,monospace;color:#123}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-weight:600;opacity:0;transition:.25s;z-index:70;pointer-events:none;width:max-content;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:980px){ .menu{grid-template-columns:1fr 1fr} .story,.vgrid{grid-template-columns:1fr} .links{display:none} }
+@media (max-width:620px){ .menu,.list{grid-template-columns:1fr} section.block{padding:72px 0} .cartbtn span{display:none} .hero .wrap{padding-bottom:44px} .nav .wrap{gap:10px} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} .reveal{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+<div class="demo"><span data-i="demo">Website template demo · fictional restaurant · designed and built by</span> <a href="https://patricksafari840.github.io/patrick_safari_portfolio/">Patrick Safari</a></div>
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="logo"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#123a4a"/><path d="M12 34c8-10 22-12 34-4l6-6v20l-6-6c-12 8-26 6-34-4z" fill="#f0b44c"/><circle cx="22" cy="32" r="2.5" fill="#123a4a"/></svg>Kivu Bites</a>
+    <ul class="links"><li><a href="#menu" data-i="nMenu">Menu</a></li><li><a href="#story" data-i="nStory">Our story</a></li><li><a href="#visit" data-i="nVisit">Visit us</a></li></ul>
+    <span class="sp"></span>
+    <div class="seg" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button></div>
+    <button class="cartbtn" id="cartBtn" aria-label="Cart">🧺 <span data-i="order">Your order</span> <b id="cartCount">0</b></button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img src="img/hero.webp" alt="Grilled tilapia with plantains on a terrace by the lake at sunset" data-alt="heroAlt" fetchpriority="high">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot" id="heroDot"></span><span id="heroStatus">…</span></span>
+    <h1 data-ih="heroTitle">Grilled by the lake, <em>straight to your table</em></h1>
+    <p data-i="heroSub">Fresh tilapia and sambaza from Lake Kivu, goat brochettes and Congolese classics. Order in two taps on WhatsApp, for pickup or delivery around Goma.</p>
+    <div class="cta"><a href="#menu" class="btn gold" data-i="seeMenu">See the menu</a><button class="btn glass" id="heroOrder" data-i="orderWa">Order on WhatsApp</button></div>
+    <div class="facts"><div><b>20–35 min</b><span data-i="fact1">pickup time</span></div><div><b>Goma</b><span data-i="fact2">delivery in town</span></div><div><b>Cash · Mobile Money</b><span data-i="fact3">payment</span></div></div>
+  </div>
+</header>
+
+<section class="block" id="menu">
+  <div class="wrap">
+    <span class="kicker reveal" data-i="kMenu">Menu</span>
+    <h2 class="reveal" data-i="menuTitle">Today's grill</h2>
+    <p class="lead reveal" data-i="menuSub">Prices in US dollars, with the franc equivalent. Tap “Add” to build your order, then send it on WhatsApp.</p>
+    <div class="cats reveal" id="cats"></div>
+    <div class="menu" id="menuGrid"></div>
+    <div class="list" id="menuList"></div>
+  </div>
+</section>
+
+<section class="block" id="story" style="padding-top:0">
+  <div class="wrap story">
+    <div class="imgs reveal"><img src="img/brochettes.webp" alt="Goat brochettes" loading="lazy" data-alt="altBro"><img src="img/sambaza.webp" alt="Fried sambaza" loading="lazy" data-alt="altSam"></div>
+    <div class="reveal">
+      <span class="kicker" data-i="kStory">Our story</span>
+      <h2 data-i="storyTitle">Simple food, done properly</h2>
+      <p class="lead" data-i="storyText">Kivu Bites is a fictional lakeside grill created to show what a modern restaurant website can do for a small business in Goma: a clear menu with real photos, prices customers can trust, and ordering through the app everyone already uses.</p>
+      <ul class="points">
+        <li><i>🐟</i><span data-i="p1">Fish bought every morning from Lake Kivu fishermen</span></li>
+        <li><i>🔥</i><span data-i="p2">Everything grilled to order over charcoal</span></li>
+        <li><i>📱</i><span data-i="p3">Order on WhatsApp, pay cash or Mobile Money</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block visit" id="visit">
+  <div class="wrap">
+    <span class="kicker" style="color:var(--gold)" data-i="kVisit">Visit us</span>
+    <h2 data-i="visitTitle">Opening hours &amp; location</h2>
+    <p class="lead" data-i="visitSub">Times are Goma time (CAT, UTC+2). The status updates live.</p>
+    <div class="vgrid">
+      <div class="hours">
+        <div class="status"><span class="dot" id="visitDot"></span><span id="visitStatus"></span></div>
+        <table id="hoursTable"></table>
+        <div class="contact">
+          <a href="#" id="waLink">💬 <span data-i="waContact">WhatsApp orders</span></a>
+          <span>📍 <span data-i="addr">Goma, North Kivu, DR Congo (demo address)</span></span>
+        </div>
+      </div>
+      <div class="map"><iframe title="Map of Goma" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=29.18%2C-1.70%2C29.28%2C-1.64&amp;layer=mapnik"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Kivu Bites · <span data-i="fdemo">demo template</span></span><span><span data-i="fby">Website by</span> <a href="https://patricksafari840.github.io/patrick_safari_portfolio/">Patrick Safari</a> · <a href="https://github.com/PatrickSafari840/kivu-bites">GitHub</a></span></div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Order">
+  <div class="dh"><h3 data-i="order">Your order</h3><button class="x" id="closeCart" aria-label="Close">×</button></div>
+  <div class="db" id="cartBody"></div>
+  <div class="df" id="cartFoot"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+'use strict';
+/* ====== Business settings: change these for a real client ====== */
+const CONFIG = {
+  name: 'Kivu Bites',
+  whatsapp: '243819405130',          // international format, no + (demo: goes to the developer)
+  fcPerUsd: 2850,                    // franc rate shown next to dollar prices
+  deliveryFeeUsd: 2,
+  timeZone: 'Africa/Lubumbashi',     // Goma time (CAT, UTC+2)
+  hours: {0:['12:00','21:00'], 1:['11:00','22:00'], 2:['11:00','22:00'], 3:['11:00','22:00'], 4:['11:00','22:00'], 5:['11:00','23:30'], 6:['11:00','23:30']}
+};
+const MENU = [
+  {id:'tilapia', cat:'fish', img:'tilapia', usd:12, tags:['chef'], en:['Grilled whole tilapia','Charcoal-grilled with lemon, onions and pili-pili, served with fried plantain.'], fr:['Tilapia entier grillé','Grillé au charbon avec citron, oignons et pili-pili, servi avec banane plantain frite.']},
+  {id:'sambaza', cat:'fish', img:'sambaza', usd:6, tags:['local'], en:['Crispy sambaza','Small Lake Kivu sardines, fried golden, with lemon and chili.'], fr:['Sambaza croustillants','Petits poissons du lac Kivu, frits et dorés, avec citron et piment.']},
+  {id:'brochettes', cat:'grill', img:'brochettes', usd:8, tags:['hot'], en:['Goat brochettes (4)','Marinated goat skewers, grilled over charcoal, with onions and spicy sauce.'], fr:['Brochettes de chèvre (4)','Brochettes de chèvre marinées, grillées au charbon, oignons et sauce pimentée.']},
+  {id:'pondu', cat:'classic', img:'pondu', usd:7, tags:['veg'], en:['Pondu & fufu','Slow-cooked cassava leaves with a smooth ball of fufu. A Congolese favourite.'], fr:['Pondu & fufu','Feuilles de manioc mijotées avec une boule de fufu. Un classique congolais.']},
+  {id:'makemba', cat:'side', img:'makemba', usd:3, tags:['veg'], en:['Fried plantain (makemba)','Sweet ripe plantain, fried until caramelised.'], fr:['Banane plantain frite (makemba)','Plantain mûr, frit jusqu’à caramélisation.']},
+  {id:'maracuja', cat:'drink', img:'maracuja', usd:3, tags:['fresh'], en:['Fresh passion fruit juice','Pressed every morning, served with ice.'], fr:['Jus de maracuja frais','Pressé chaque matin, servi avec des glaçons.']},
+  {id:'chicken', cat:'grill', usd:9, tags:[], en:['Half grilled chicken','Lemon-garlic marinade, chips or plantain.'], fr:['Demi-poulet grillé','Marinade citron-ail, frites ou plantain.']},
+  {id:'beans', cat:'classic', usd:5, tags:['veg'], en:['Beans with rice','Red beans in tomato sauce with white rice.'], fr:['Haricots et riz','Haricots rouges sauce tomate et riz blanc.']},
+  {id:'chips', cat:'side', usd:2.5, tags:['veg'], en:['Chips (frites)','Hand-cut potatoes from the Masisi hills.'], fr:['Frites','Pommes de terre des collines de Masisi, coupées main.']},
+  {id:'salad', cat:'side', usd:2, tags:['veg'], en:['Kachumbari salad','Tomato, onion, chili and lime.'], fr:['Salade kachumbari','Tomate, oignon, piment et citron vert.']},
+  {id:'tea', cat:'drink', usd:1.5, tags:[], en:['Spiced Kivu tea','Local black tea with ginger.'], fr:['Thé épicé du Kivu','Thé noir local au gingembre.']},
+  {id:'water', cat:'drink', usd:1, tags:[], en:['Mineral water 50 cl',''], fr:['Eau minérale 50 cl','']}
+];
+const I18N = {
+ en:{demo:'Website template demo · fictional restaurant · designed and built by',nMenu:'Menu',nStory:'Our story',nVisit:'Visit us',order:'Your order',heroTitle:'Grilled by the lake, <em>straight to your table</em>',heroAlt:'Grilled tilapia with plantains on a terrace by the lake at sunset',heroSub:'Fresh tilapia and sambaza from Lake Kivu, goat brochettes and Congolese classics. Order in two taps on WhatsApp, for pickup or delivery around Goma.',seeMenu:'See the menu',orderWa:'Order on WhatsApp',fact1:'pickup time',fact2:'delivery in town',fact3:'payment',kMenu:'Menu',menuTitle:"Today's grill",menuSub:'Prices in US dollars, with the franc equivalent. Tap “Add” to build your order, then send it on WhatsApp.',kStory:'Our story',storyTitle:'Simple food, done properly',storyText:'Kivu Bites is a fictional lakeside grill created to show what a modern restaurant website can do for a small business in Goma: a clear menu with real photos, prices customers can trust, and ordering through the app everyone already uses.',p1:'Fish bought every morning from Lake Kivu fishermen',p2:'Everything grilled to order over charcoal',p3:'Order on WhatsApp, pay cash or Mobile Money',kVisit:'Visit us',visitTitle:'Opening hours & location',visitSub:'Times are Goma time (CAT, UTC+2). The status updates live.',waContact:'WhatsApp orders',addr:'Goma, North Kivu, DR Congo (demo address)',fdemo:'demo template',fby:'Website by',altBro:'Goat brochettes',altSam:'Fried sambaza',
+  cats:{all:'All',fish:'Lake fish',grill:'Grill',classic:'Congolese classics',side:'Sides',drink:'Drinks'},tags:{chef:"Chef's pick",local:'Local',hot:'Spicy',veg:'Vegetarian',fresh:'Fresh'},
+  add:'Add',added:'added',empty:'Your basket is empty. Add something tasty from the menu.',pickup:'Pickup',delivery:'Delivery',name:'Your name',phone:'Phone (optional)',area:'Neighbourhood / address',note:'Note for the kitchen',notePh:'e.g. no chili, well done',subtotal:'Subtotal',fee:'Delivery',total:'Total',send:'Send order on WhatsApp',preview:'Message preview',demoNote:'Demo: the order is sent to the developer’s WhatsApp so you can see how it works.',openNow:'Open now',closesAt:'closes at',closedNow:'Closed now',opensAt:'opens',today:'today',tomorrow:'tomorrow',days:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],needName:'Please enter your name',needArea:'Please enter a delivery address',msgHello:'Hello {name}, I would like to order:',msgPick:'Pickup',msgDel:'Delivery to',msgName:'Name',msgNote:'Note',msgTotal:'Total'},
+ fr:{demo:'Démo de modèle de site · restaurant fictif · conçu et développé par',nMenu:'Menu',nStory:'Notre histoire',nVisit:'Nous trouver',order:'Votre commande',heroTitle:'Grillé au bord du lac, <em>servi à votre table</em>',heroAlt:'Tilapia grillé avec bananes plantains sur une terrasse au bord du lac au coucher du soleil',heroSub:'Tilapia et sambaza frais du lac Kivu, brochettes de chèvre et classiques congolais. Commandez en deux clics sur WhatsApp, à emporter ou en livraison à Goma.',seeMenu:'Voir le menu',orderWa:'Commander sur WhatsApp',fact1:'pour emporter',fact2:'livraison en ville',fact3:'paiement',kMenu:'Menu',menuTitle:'Le grill du jour',menuSub:'Prix en dollars, avec l’équivalent en francs. Touchez « Ajouter » pour composer votre commande, puis envoyez-la sur WhatsApp.',kStory:'Notre histoire',storyTitle:'Une cuisine simple, bien faite',storyText:'Kivu Bites est un grill fictif au bord du lac, créé pour montrer ce qu’un site moderne peut apporter à un petit restaurant de Goma : un menu clair avec de vraies photos, des prix fiables et la commande via l’application que tout le monde utilise déjà.',p1:'Poisson acheté chaque matin aux pêcheurs du lac Kivu',p2:'Tout est grillé à la commande au charbon',p3:'Commande sur WhatsApp, paiement en espèces ou Mobile Money',kVisit:'Nous trouver',visitTitle:'Horaires et adresse',visitSub:'Heure de Goma (CAT, UTC+2). Le statut se met à jour en direct.',waContact:'Commandes WhatsApp',addr:'Goma, Nord-Kivu, RDC (adresse de démo)',fdemo:'modèle de démonstration',fby:'Site réalisé par',altBro:'Brochettes de chèvre',altSam:'Sambaza frits',
+  cats:{all:'Tout',fish:'Poissons du lac',grill:'Grillades',classic:'Classiques congolais',side:'Accompagnements',drink:'Boissons'},tags:{chef:'Choix du chef',local:'Local',hot:'Épicé',veg:'Végétarien',fresh:'Frais'},
+  add:'Ajouter',added:'ajouté',empty:'Votre panier est vide. Ajoutez un plat depuis le menu.',pickup:'À emporter',delivery:'Livraison',name:'Votre nom',phone:'Téléphone (facultatif)',area:'Quartier / adresse',note:'Note pour la cuisine',notePh:'ex. sans piment, bien cuit',subtotal:'Sous-total',fee:'Livraison',total:'Total',send:'Envoyer la commande sur WhatsApp',preview:'Aperçu du message',demoNote:'Démo : la commande est envoyée sur le WhatsApp du développeur pour montrer le fonctionnement.',openNow:'Ouvert',closesAt:'ferme à',closedNow:'Fermé',opensAt:'ouvre',today:"aujourd'hui",tomorrow:'demain',days:['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],needName:'Veuillez indiquer votre nom',needArea:'Veuillez indiquer une adresse de livraison',msgHello:'Bonjour {name}, je voudrais commander :',msgPick:'À emporter',msgDel:'Livraison à',msgName:'Nom',msgNote:'Note',msgTotal:'Total'}
+};
+const store = { get(k,d){ try{ const v = localStorage.getItem('kb.'+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }, set(k,v){ try{ localStorage.setItem('kb.'+k, JSON.stringify(v)); }catch(e){} } };
+let lang = store.get('lang', (navigator.language||'').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+let cart = store.get('cart', {});
+let mode = store.get('mode', 'pickup');
+let cat = 'all';
+const L = () => I18N[lang], t = k => L()[k] ?? I18N.en[k] ?? k;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const usd = v => '$' + (Number.isInteger(v) ? v : v.toFixed(2));
+const fc = v => Math.round(v*CONFIG.fcPerUsd/100)*100;
+const fcTxt = v => fc(v).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + ' FC';
+function toast(m){ const el = $('#toast'); el.textContent = m; el.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('on'), 1600); }
+
+/* ---------- Menu ---------- */
+function renderCats(){
+  const cats = ['all', ...new Set(MENU.map(m => m.cat))];
+  $('#cats').innerHTML = cats.map(c => `<button data-cat="${c}" aria-pressed="${c === cat}">${L().cats[c]}</button>`).join('');
+}
+function renderMenu(){
+  const items = MENU.filter(m => cat === 'all' || m.cat === cat);
+  $('#menuGrid').innerHTML = items.filter(m => m.img).map(m => `<article class="dish reveal in"><div class="ph"><img src="img/${m.img}.webp" alt="${esc(m[lang][0])}" loading="lazy"></div><div class="bd"><h3>${esc(m[lang][0])}<span class="price">${usd(m.usd)}<small>${fcTxt(m.usd)}</small></span></h3><p>${esc(m[lang][1])}</p><div class="tags">${m.tags.map(g => `<span class="tag ${g === 'hot' ? 'hot' : g === 'veg' ? 'veg' : ''}">${L().tags[g]}</span>`).join('')}</div><button class="add" data-add="${m.id}">+ ${t('add')}</button></div></article>`).join('');
+  $('#menuList').innerHTML = items.filter(m => !m.img).map(m => `<div class="row"><div><b>${esc(m[lang][0])}</b>${m[lang][1] ? `<span>${esc(m[lang][1])}</span>` : ''}</div><span class="price">${usd(m.usd)}<small>${fcTxt(m.usd)}</small></span><button class="add" data-add="${m.id}">+ ${t('add')}</button></div>`).join('');
+}
+$('#cats').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (!b) return; cat = b.dataset.cat; renderCats(); renderMenu(); });
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-add]'); if (!a) return;
+  cart[a.dataset.add] = (cart[a.dataset.add] || 0) + 1; saveCart();
+  const m = MENU.find(x => x.id === a.dataset.add); toast(m[lang][0] + ' ' + t('added') + ' ✓');
+  $('#cartBtn').animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}], {duration:300});
+});
+
+/* ---------- Cart ---------- */
+const lines = () => Object.entries(cart).filter(([,q]) => q > 0).map(([id, q]) => ({m:MENU.find(x => x.id === id), q})).filter(l => l.m);
+const subtotal = () => lines().reduce((a,l) => a + l.m.usd*l.q, 0);
+function saveCart(){ store.set('cart', cart); renderCart(); }
+function renderCart(){
+  const ls = lines(), n = ls.reduce((a,l) => a + l.q, 0);
+  $('#cartCount').textContent = n;
+  if (!ls.length){ $('#cartBody').innerHTML = `<p class="empty">🧺<br>${t('empty')}</p>`; $('#cartFoot').innerHTML = ''; return; }
+  const form = store.get('form', {name:'', phone:'', area:'', note:''});
+  $('#cartBody').innerHTML = ls.map(({m, q}) => `<div class="ci">${m.img ? `<img src="img/${m.img}.webp" alt="">` : `<span class="noimg">🍽️</span>`}<div><b>${esc(m[lang][0])}</b><br><small>${usd(m.usd)} × ${q} = ${usd(m.usd*q)}</small></div><div class="qty"><button data-dec="${m.id}" aria-label="−">−</button><span>${q}</span><button data-inc="${m.id}" aria-label="+">+</button></div></div>`).join('') +
+   `<div class="mode"><button data-mode="pickup" aria-pressed="${mode === 'pickup'}">🛍️ ${t('pickup')}</button><button data-mode="delivery" aria-pressed="${mode === 'delivery'}">🛵 ${t('delivery')}</button></div>
+    <label class="fld">${t('name')}<input id="fName" autocomplete="name" value="${esc(form.name)}"></label>
+    ${mode === 'delivery' ? `<label class="fld">${t('area')}<input id="fArea" value="${esc(form.area)}" placeholder="Himbi, Katindo, Birere…"></label>` : ''}
+    <label class="fld">${t('note')}<input id="fNote" value="${esc(form.note)}" placeholder="${t('notePh')}"></label>
+    <div><div class="muted" style="margin-bottom:6px">${t('preview')}</div><div class="preview" id="msgPreview"></div></div>`;
+  const fee = mode === 'delivery' ? CONFIG.deliveryFeeUsd : 0, tot = subtotal() + fee;
+  $('#cartFoot').innerHTML = `<div class="tot"><span>${t('subtotal')}</span><span>${usd(subtotal())}</span></div>${fee ? `<div class="tot"><span>${t('fee')}</span><span>${usd(fee)}</span></div>` : ''}<div class="tot big"><span>${t('total')}</span><span>${usd(tot)} <small class="muted">· ${fcTxt(tot)}</small></span></div><button class="btn wa" id="sendWa" style="justify-content:center">💬 ${t('send')}</button><div class="muted">${t('demoNote')}</div>`;
+  updatePreview();
+}
+function message(){
+  const f = store.get('form', {}), fee = mode === 'delivery' ? CONFIG.deliveryFeeUsd : 0, tot = subtotal() + fee;
+  return [t('msgHello').replace('{name}', CONFIG.name), '', ...lines().map(({m, q}) => `• ${q} × ${m[lang][0]} (${usd(m.usd*q)})`), '',
+    mode === 'delivery' ? `🛵 ${t('msgDel')}: ${f.area || '…'} (+${usd(fee)})` : `🛍️ ${t('msgPick')}`,
+    `👤 ${t('msgName')}: ${f.name || '…'}`, f.note ? `📝 ${t('msgNote')}: ${f.note}` : '', `💵 ${t('msgTotal')}: ${usd(tot)} (${fcTxt(tot)})`].filter((l, i, a) => l !== '' || a[i - 1] !== '').join('\n').trim();
+}
+function updatePreview(){ const el = $('#msgPreview'); if (el) el.textContent = message(); }
+$('#cartBody').addEventListener('click', e => {
+  const inc = e.target.closest('[data-inc]'), dec = e.target.closest('[data-dec]'), md = e.target.closest('[data-mode]');
+  if (inc){ cart[inc.dataset.inc]++; saveCart(); }
+  if (dec){ cart[dec.dataset.dec]--; if (cart[dec.dataset.dec] <= 0) delete cart[dec.dataset.dec]; saveCart(); }
+  if (md){ mode = md.dataset.mode; store.set('mode', mode); renderCart(); }
+});
+$('#cartBody').addEventListener('input', e => {
+  const f = store.get('form', {name:'', phone:'', area:'', note:''});
+  if (e.target.id === 'fName') f.name = e.target.value; if (e.target.id === 'fArea') f.area = e.target.value; if (e.target.id === 'fNote') f.note = e.target.value;
+  store.set('form', f); updatePreview();
+});
+$('#cartFoot').addEventListener('click', e => {
+  if (!e.target.closest('#sendWa')) return;
+  const f = store.get('form', {});
+  if (!f.name || !f.name.trim()){ toast(t('needName')); $('#fName').focus(); return; }
+  if (mode === 'delivery' && !(f.area || '').trim()){ toast(t('needArea')); $('#fArea').focus(); return; }
+  window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(message()), '_blank', 'noopener');
+});
+const openCart = () => { renderCart(); $('#drawer').classList.add('on'); $('#scrim').classList.add('on'); };
+const closeCart = () => { $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); };
+$('#cartBtn').addEventListener('click', openCart);
+$('#heroOrder').addEventListener('click', () => lines().length ? openCart() : document.getElementById('menu').scrollIntoView());
+$('#closeCart').addEventListener('click', closeCart); $('#scrim').addEventListener('click', closeCart);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+/* ---------- Hours / open status (Goma time) ---------- */
+function gomaNow(){
+  const p = new Intl.DateTimeFormat('en-US', {timeZone:CONFIG.timeZone, weekday:'short', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}).formatToParts(new Date());
+  const g = k => p.find(x => x.type === k).value;
+  return {day:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday')), min:+g('hour')*60 + +g('minute')};
+}
+const toMin = s => { const [h, m] = s.split(':').map(Number); return h*60 + m; };
+function renderHours(){
+  const now = gomaNow(), [o, c] = CONFIG.hours[now.day], open = now.min >= toMin(o) && now.min < toMin(c);
+  let txt;
+  if (open) txt = `${t('openNow')} · ${t('closesAt')} ${c}`;
+  else { const before = now.min < toMin(o); txt = `${t('closedNow')} · ${t('opensAt')} ${before ? t('today') : t('tomorrow')} ${before ? o : CONFIG.hours[(now.day + 1) % 7][0]}`; }
+  ['#heroDot','#visitDot'].forEach(s => $(s).classList.toggle('open', open));
+  $('#heroStatus').textContent = txt; $('#visitStatus').textContent = txt;
+  $('#hoursTable').innerHTML = [1,2,3,4,5,6,0].map(d => `<tr class="${d === now.day ? 'today' : ''}"><td>${L().days[d]}</td><td>${CONFIG.hours[d][0]} – ${CONFIG.hours[d][1]}</td></tr>`).join('');
+}
+
+/* ---------- Language ---------- */
+function applyLang(){
+  document.documentElement.lang = lang;
+  $$('[data-i]').forEach(el => el.textContent = t(el.dataset.i));
+  $$('[data-ih]').forEach(el => el.innerHTML = t(el.dataset.ih));
+  $$('[data-alt]').forEach(el => el.alt = t(el.dataset.alt));
+  $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  renderCats(); renderMenu(); renderCart(); renderHours();
+}
+$$('[data-lang]').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; store.set('lang', lang); applyLang(); }));
+$('#waLink').href = 'https://wa.me/' + CONFIG.whatsapp;
+$('#yr').textContent = new Date().getFullYear();
+applyLang(); setInterval(renderHours, 60000);
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12}) : null;
+$$('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+})();
+</script>
+</body>
+</html>
